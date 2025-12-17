@@ -8,8 +8,8 @@ namespace FinanceControl.Domain.Enums
 {
     public enum EnumTransactionType
     {
-        Expense = 0,
-        Income = 1,
-        Transfer = 2
+        Expense,
+        Income,
+        Transfer
     }
 }

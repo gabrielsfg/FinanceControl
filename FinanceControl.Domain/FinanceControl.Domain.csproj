@@ -7,8 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Entities\" />
       <Folder Include="Interfaces\Repository\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\FinanceControl.Shared\FinanceControl.Shared.csproj" />
     </ItemGroup>
 
 </Project>

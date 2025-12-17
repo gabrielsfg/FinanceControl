@@ -8,7 +8,7 @@ namespace FinanceControl.Domain.Enums
 {
     public enum EnumPaymentType
     {
-        OneTime = 0,
-        Installment = 1
+        OneTime,
+        Installment
     }
 }

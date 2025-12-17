@@ -11,8 +11,4 @@
       <Folder Include="Helpers\" />
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\FinanceControl.Domain\FinanceControl.Domain.csproj" />
-    </ItemGroup>
-
 </Project>

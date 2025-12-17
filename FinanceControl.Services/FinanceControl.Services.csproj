@@ -17,4 +17,10 @@
       <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\FinanceControl.Data\FinanceControl.Data.csproj" />
+      <ProjectReference Include="..\FinanceControl.Domain\FinanceControl.Domain.csproj" />
+      <ProjectReference Include="..\FinanceControl.Shared\FinanceControl.Shared.csproj" />
+    </ItemGroup>
+
 </Project>
