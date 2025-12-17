@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FinanceControl.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251217023016_AddTransactionsTable")]
+    [Migration("20251217023939_AddTransactionsTable")]
     partial class AddTransactionsTable
     {
         /// <inheritdoc />

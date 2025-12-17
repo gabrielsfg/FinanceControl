@@ -25,8 +25,4 @@
       <ProjectReference Include="..\FinanceControl.Shared\FinanceControl.Shared.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Mappings\" />
-    </ItemGroup>
-
 </Project>
