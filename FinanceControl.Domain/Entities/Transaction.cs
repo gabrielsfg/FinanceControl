@@ -5,12 +5,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FinanceControl.Shared.Dtos;
+using FinanceControl.Shared.Helpers;
 
 namespace FinanceControl.Domain.Entities
 {
-    public class Transaction
+    public class Transaction : BaseEntity
     {
-        public int Id { get; set; }
         public int Value  { get; set; }
         public EnumTransactionType Type { get; set; }
         public int Category {  get; set; }
@@ -18,6 +19,22 @@ namespace FinanceControl.Domain.Entities
         public DateTime TransactionDate { get; set; }
         public EnumPaymentType PaymentType { get; set; }
         public EnumPaymentRecurrence Reccurence { get; set; }
-        public DateTime CreatedAt { get; set; }
+        
+        public Transaction(CreateTransactionRequestDto requestDto)
+        {
+            Value = requestDto.Value;
+            Type = Enum.Parse<EnumTransactionType>(requestDto.Type);
+            Category = requestDto.Category;
+            Description = requestDto.Description;
+            TransactionDate = requestDto.Date;
+            PaymentType = Enum.Parse<EnumPaymentType>(requestDto.PaymentType);
+            Reccurence = Enum.Parse<EnumPaymentRecurrence>(requestDto.Reccurence);
+        }
+        
+        protected  Transaction()
+        {
+        }
     }
+    
+    
 }

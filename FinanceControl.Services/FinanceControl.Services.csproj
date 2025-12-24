@@ -9,7 +9,6 @@
     <ItemGroup>
       <Folder Include="Extensions\" />
       <Folder Include="Validations\" />
-      <Folder Include="Services\" />
     </ItemGroup>
 
     <ItemGroup>

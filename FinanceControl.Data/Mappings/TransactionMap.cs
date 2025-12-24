@@ -37,7 +37,11 @@ namespace FinanceControl.Data.Mappings
                     .HasColumnType("timestamp without time zone")
                     .HasDefaultValueSql("timezone('America/Sao_Paulo', now())")
                     .IsRequired()
-                    .ValueGeneratedOnAdd(); ;
+                    .ValueGeneratedOnAdd();
+            builder.Property(t => t.UpdatedAt)
+                .HasColumnType("timestamp without time zone")
+                .HasDefaultValueSql("timezone('America/Sao_Paulo', now())")
+                .ValueGeneratedOnAdd(); ;
         }
     }
 }
