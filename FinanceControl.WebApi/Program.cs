@@ -1,8 +1,16 @@
 using FinanceControl.Data.Data;
+using FinanceControl.Domain.Interfaces.Service;
+using FinanceControl.Services.Services;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//DI Services
+builder.Services.AddScoped<ITransactionService, TransactionService>();
+
+
+//DI Repositories
 
 //Add migration services.
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -16,7 +24,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
-
 
 var app = builder.Build();
 

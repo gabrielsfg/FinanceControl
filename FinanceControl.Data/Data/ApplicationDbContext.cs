@@ -17,13 +17,19 @@ namespace FinanceControl.Data.Data
 
         public DbSet<Transaction> Transactions { get; set; }
 
-        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        public override int SaveChanges()
         {
             UpdateOrCreateEntity();
-            return await base.SaveChangesAsync(cancellationToken);
+            return base.SaveChanges();
         }
 
-        public async Task UpdateOrCreateEntity()
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            UpdateOrCreateEntity();
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
+        private void UpdateOrCreateEntity()
         {
             var entries = ChangeTracker .Entries<BaseEntity>();
             var dateTimeBrasilia = TimeZoneInfo
@@ -31,6 +37,7 @@ namespace FinanceControl.Data.Data
                     DateTime.UtcNow,
                     TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time")
                 );
+
             foreach (var entry in entries)
             {
                 if (entry.State == EntityState.Added)

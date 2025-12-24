@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FinanceControl.Domain.Entities;
 using FinanceControl.Shared.Dtos;
+using FinanceControl.Shared.Models;
 
 namespace FinanceControl.Domain.Interfaces.Service
 {
     public interface ITransactionService
     {
         Task CreateTransactionAsync(CreateTransactionRequestDto requestDto);
+
+        Task<TransactionResponseDto?> GetTransactionByIdAsync(int transactionId);
+
+        Task<PagedResponse<TransactionResponseDto>> GetAllTransactionsPagedAsync(int page, int pageSize);
     }
 }

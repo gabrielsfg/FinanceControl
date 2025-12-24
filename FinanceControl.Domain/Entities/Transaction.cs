@@ -16,19 +16,26 @@ namespace FinanceControl.Domain.Entities
         public EnumTransactionType Type { get; set; }
         public int Category {  get; set; }
         public string? Description { get; set; }
-        public DateTime TransactionDate { get; set; }
+        public DateOnly TransactionDate { get; set; }
         public EnumPaymentType PaymentType { get; set; }
         public EnumPaymentRecurrence Reccurence { get; set; }
         
-        public Transaction(CreateTransactionRequestDto requestDto)
+        public Transaction(
+            int value,
+            EnumTransactionType type,
+            int category,
+            DateOnly transactionDate,
+            EnumPaymentType paymentType,
+            EnumPaymentRecurrence recurrence,
+            string? description = null)
         {
-            Value = requestDto.Value;
-            Type = Enum.Parse<EnumTransactionType>(requestDto.Type);
-            Category = requestDto.Category;
-            Description = requestDto.Description;
-            TransactionDate = requestDto.Date;
-            PaymentType = Enum.Parse<EnumPaymentType>(requestDto.PaymentType);
-            Reccurence = Enum.Parse<EnumPaymentRecurrence>(requestDto.Reccurence);
+            Value = Value;
+            Type = Type;
+            Category = Category;
+            Description = Description;
+            TransactionDate = TransactionDate;
+            PaymentType = PaymentType;
+            Reccurence = Reccurence;
         }
         
         protected  Transaction()
