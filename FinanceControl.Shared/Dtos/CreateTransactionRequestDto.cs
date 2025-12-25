@@ -9,7 +9,5 @@
         public DateOnly Date { get; set; }
         public string PaymentType { get; set; }
         public string Reccurence { get; set; }
-        public int? FromWallet { get; set; }
-        public int? ToWallet { get; set;}
     }
 }

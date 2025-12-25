@@ -9,12 +9,10 @@ namespace FinanceControl.WebApi.Controllers
     [Route("[controller]")]
     public class TransactionController : Controller
     {
-        private readonly ILogger<TransactionController> _logger;
         private readonly ITransactionService _transactionService;
 
-        public TransactionController(ILogger<TransactionController> logger, ITransactionService transactionService)
+        public TransactionController(ITransactionService transactionService)
         {
-            _logger = logger;
             _transactionService = transactionService;
         }
         [HttpPost]
@@ -39,6 +37,13 @@ namespace FinanceControl.WebApi.Controllers
         {
             var response = await _transactionService.GetAllTransactionsPagedAsync(page, pageSize);
             return Ok(response);
+        }
+
+        [HttpPatch("update")]
+        public async Task<IActionResult> UpdateTransactionAsyncById([FromBody] UpdateTransactionRequestDto requestDto)
+        {
+            await _transactionService.UpdateTransactionAsyncById(requestDto);
+            return Ok();
         }
     }
 }

@@ -87,4 +87,31 @@ public class TransactionService : ITransactionService
 
         return response;
     }
+
+    public async Task UpdateTransactionAsyncById(UpdateTransactionRequestDto requestDto)
+    {
+        try
+        {
+            Transaction transaction = new Transaction(
+                requestDto.Value,
+                Enum.Parse<EnumTransactionType>(requestDto.Type),
+                requestDto.Category,
+                requestDto.Date,
+                Enum.Parse<EnumPaymentType>(requestDto.PaymentType),
+                Enum.Parse<EnumPaymentRecurrence>(requestDto.Reccurence),
+                requestDto.Description
+            );
+        
+            var transactionToPatch = await _context.Transactions.FindAsync(requestDto.TransactionId);
+        
+            _context.Transactions.Update(transactionToPatch);
+            await _context.SaveChangesAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            throw;
+        }
+        
+    }
 }

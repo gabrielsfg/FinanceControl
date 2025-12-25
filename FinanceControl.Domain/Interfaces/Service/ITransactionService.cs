@@ -16,5 +16,7 @@ namespace FinanceControl.Domain.Interfaces.Service
         Task<TransactionResponseDto?> GetTransactionByIdAsync(int transactionId);
 
         Task<PagedResponse<TransactionResponseDto>> GetAllTransactionsPagedAsync(int page, int pageSize);
+
+        Task UpdateTransactionAsyncById( UpdateTransactionRequestDto requestDto);
     }
 }

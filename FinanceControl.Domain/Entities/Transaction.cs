@@ -29,13 +29,13 @@ namespace FinanceControl.Domain.Entities
             EnumPaymentRecurrence recurrence,
             string? description = null)
         {
-            Value = Value;
-            Type = Type;
-            Category = Category;
-            Description = Description;
-            TransactionDate = TransactionDate;
-            PaymentType = PaymentType;
-            Reccurence = Reccurence;
+            Value = value;
+            Type = type;
+            Category = category;
+            Description = description;
+            TransactionDate = transactionDate;
+            PaymentType = paymentType;
+            Reccurence = recurrence;
         }
         
         protected  Transaction()
