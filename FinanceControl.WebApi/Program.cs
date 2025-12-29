@@ -62,6 +62,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
         };
     });
+builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly, includeInternalTypes: true); 
 
 var app = builder.Build();
 

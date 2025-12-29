@@ -29,6 +29,7 @@ namespace FinanceControl.Services.Services
 
         public async Task<User?> RegisterUserAsync(CreateUserRequestDto requestDto)
         {
+            
             if (await _context.Users.AnyAsync(u => u.Email == requestDto.Email))
                 return null;
 
