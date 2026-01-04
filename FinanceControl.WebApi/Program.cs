@@ -2,6 +2,8 @@ using System.Text;
 using FinanceControl.Data.Data;
 using FinanceControl.Domain.Interfaces.Service;
 using FinanceControl.Services.Services;
+using FinanceControl.Services.Validations;
+using FinanceControl.Shared.Dtos;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +18,9 @@ builder.Services.AddScoped<IUserService, UserService>();
 
 
 //DI Repositories
+
+//DI Validators
+builder.Services.AddScoped<IValidator<CreateUserRequestDto>, CreateUserValidator>();
 
 //Add migration services.
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

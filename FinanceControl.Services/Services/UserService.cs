@@ -1,7 +1,10 @@
 ﻿using FinanceControl.Data.Data;
 using FinanceControl.Domain.Entities;
 using FinanceControl.Domain.Interfaces.Service;
+using FinanceControl.Services.Validations;
 using FinanceControl.Shared.Dtos;
+using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +24,9 @@ namespace FinanceControl.Services.Services
         private readonly ApplicationDbContext _context;
         private readonly IConfiguration _configuration;
 
-        public UserService(ApplicationDbContext context, IConfiguration configuration)
+        public UserService(
+            ApplicationDbContext context, 
+            IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;
@@ -29,7 +34,6 @@ namespace FinanceControl.Services.Services
 
         public async Task<User?> RegisterUserAsync(CreateUserRequestDto requestDto)
         {
-            
             if (await _context.Users.AnyAsync(u => u.Email == requestDto.Email))
                 return null;
 
