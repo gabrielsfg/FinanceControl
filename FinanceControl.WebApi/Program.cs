@@ -15,6 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 //DI Services
 builder.Services.AddScoped<ITransactionService, TransactionService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 
 //DI Repositories
