@@ -40,23 +40,20 @@ namespace FinanceControl.Services.Services
         }
         public async Task<GetCategoriesResponseDto> GetCategoriesAsync(int userId)
         {
-            var categories = await _context.Categories.Where(c => c.UserId == userId).OrderBy(c => c.Name).ToListAsync();
+            var categories = await _context.Categories
+                .Where(c => c.UserId == userId)
+                .OrderBy(c => c.Name)
+                .Select(c => new CategoryResponseDto 
+                { 
+                    Id = c.Id, 
+                    Name = c.Name
+                })
+                .ToListAsync();
 
-            var categoriesDto = categories.Select(c => new CategoryResponseDto
-            {
-                Id = c.Id,
-                Name = c.Name,
-            });
-
-            var response = new GetCategoriesResponseDto()
-            {
-                Categories = categoriesDto
-            };
-
-            return response;
+            return new GetCategoriesResponseDto {  Categories = categories};
         }
 
-        public async Task<Result<GetCategoriesResponseDto>> PatchCategoryByIdAsync(PatchCategoryRequestDto requestDto, int userId)
+        public async Task<Result<GetCategoriesResponseDto>> UpdateCategoryByIdAsync(UpdateCategoryRequestDto requestDto, int userId)
         {
             var categoryToPatch = await _context.Categories
                 .FirstOrDefaultAsync(c => c.UserId.Equals(userId) && c.Id.Equals(requestDto.Id));

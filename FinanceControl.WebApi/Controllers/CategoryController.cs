@@ -1,27 +1,36 @@
 ﻿using FinanceControl.Domain.Interfaces.Service;
+using FinanceControl.Services.Extensions;
 using FinanceControl.Shared.Dtos.Request;
 using FinanceControl.Shared.Models;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace FinanceControl.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CategoryController : BaseController
     {
         private readonly ICategoryService _categoryService;
-        public CategoryController(ICategoryService categoryService)
+        private readonly IValidator<CreateCategoryRequestDto> _createCategoryValidator;
+        private readonly IValidator<UpdateCategoryRequestDto> _updateCategoryValidator;
+        public CategoryController(ICategoryService categoryService, IValidator<CreateCategoryRequestDto> createCategoryValidator ,IValidator<UpdateCategoryRequestDto> updateCategoryValidator)
         {
             _categoryService = categoryService;
+            _createCategoryValidator = createCategoryValidator;
+            _updateCategoryValidator = updateCategoryValidator;
         }
 
-        [Authorize]
+        
         [HttpPost]
         public async Task<IActionResult> CreateCategoryAsync([FromBody]CreateCategoryRequestDto requestDto)
         {
-            if (requestDto == null)
-                return BadRequest();
+            var validatorResult = _createCategoryValidator.Validate(requestDto);
+            if (validatorResult.ToActionResult() is { } errorResult)
+                return errorResult;
 
             var userId = GetUserId();
 
@@ -31,7 +40,7 @@ namespace FinanceControl.WebApi.Controllers
 
         }
 
-        [Authorize]
+        
         [HttpGet]
         public async Task<IActionResult> GetAllCategoriesAsync()
         {
@@ -40,12 +49,16 @@ namespace FinanceControl.WebApi.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        
         [HttpPatch("by-id")]
-        public async Task<IActionResult> PatchCategoryByIdAsync([FromBody] PatchCategoryRequestDto requestDto)
+        public async Task<IActionResult> UpdateCategoryByIdAsync([FromBody] UpdateCategoryRequestDto requestDto)
         {
+            var validatorResult = _updateCategoryValidator.Validate(requestDto);
+            if (validatorResult.ToActionResult() is { } errorResult)
+                return errorResult;
+
             var userId = GetUserId();
-            var result = await _categoryService.PatchCategoryByIdAsync(requestDto, userId);
+            var result = await _categoryService.UpdateCategoryByIdAsync(requestDto, userId);
 
             if (result.IsFailure)
                 return NotFound(new { error = result.Error });
@@ -53,7 +66,7 @@ namespace FinanceControl.WebApi.Controllers
             return Ok(result.Value);
         }
 
-        [Authorize]
+        
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteCategoryByIdAsync([FromRoute]int id)
         {

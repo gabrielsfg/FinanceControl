@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FinanceControl.Shared.Dtos.Request
 {
-    public class PatchCategoryRequestDto
+    public class UpdateCategoryRequestDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

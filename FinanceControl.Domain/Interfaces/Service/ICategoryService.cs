@@ -14,7 +14,7 @@ namespace FinanceControl.Domain.Interfaces.Service
     {
         Task<Result<CategoryResponseDto>> CreateCategoryAsync(CreateCategoryRequestDto requestDto, int userId);
         Task<GetCategoriesResponseDto> GetCategoriesAsync(int userId);
-        Task<Result<GetCategoriesResponseDto>> PatchCategoryByIdAsync(PatchCategoryRequestDto requestDto, int userId);
+        Task<Result<GetCategoriesResponseDto>> UpdateCategoryByIdAsync(UpdateCategoryRequestDto requestDto, int userId);
         Task<Result<GetCategoriesResponseDto>> DeleteCategoryByIdAsync(int id, int userId);
 
     }

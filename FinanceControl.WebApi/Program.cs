@@ -4,6 +4,7 @@ using FinanceControl.Domain.Interfaces.Service;
 using FinanceControl.Services.Services;
 using FinanceControl.Services.Validations;
 using FinanceControl.Shared.Dtos;
+using FinanceControl.Shared.Dtos.Request;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -19,9 +20,6 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 
 //DI Repositories
-
-//DI Validators
-builder.Services.AddScoped<IValidator<CreateUserRequestDto>, CreateUserValidator>();
 
 //Add migration services.
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -52,7 +50,7 @@ builder.Services.AddSwaggerGen(options =>
         [new OpenApiSecuritySchemeReference("Bearer", document)] = new List<string>()
     });
 });
-builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateCategoryValidator>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
