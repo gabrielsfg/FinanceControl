@@ -29,6 +29,7 @@ namespace FinanceControl.Services.Services
 
             var area = new Area()
             {
+                UserId = userId,
                 BudgetId = requestDto.BudgetId,
                 Name = requestDto.Name
             };
@@ -44,7 +45,7 @@ namespace FinanceControl.Services.Services
         {
             var areas = await _context.Areas.Where(a => a.UserId == userId && a.BudgetId == budgetId).Select(a => new GetAllAreaItemResponseDto
             {
-                Id = a.BudgetId,
+                Id = a.Id,
                 Name = a.Name,
             }).ToListAsync();
 
